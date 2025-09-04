@@ -2,24 +2,31 @@
 
 import './App.css';
 
-export default function Square() {
+//componente Square
+function Square({valor}) {
+  return (
+    <button classname="square">{valor}</button>
+  )
+}
+
+export default function Tabuleiro() {
   return (
     <div>
-    <div>
-    <button classname="square">1</button>
-    <button classname="square">2</button>
-    <button classname="square">3</button>
+      <div>
+        <Square valor = "1" />
+        <Square valor = "2" />
+        <Square valor = "3" />
+      </div>
+      <div>
+        <Square valor = "4" />
+        <Square valor = "5" />
+        <Square valor = "6" />
+      </div>
+      <div>
+        <Square valor = "7" />
+        <Square valor = "8" />
+        <Square valor = "9" />
+      </div>
     </div>
-    <div>
-    <button classname="square">4</button>
-    <button classname="square">5</button>
-    <button classname="square">6</button>
-    </div>
-    <div>
-    <button classname="square">7</button>
-    <button classname="square">8</button>
-    <button classname="square">9</button>
-    </div>
-  </div> 
   )
 }
