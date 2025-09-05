@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './App.css';
 
 //componente Square
-function Square({valor, onSquareClick}) {
+function Square({ valor, onSquareClick }) {
   return (
     <button classname="square" onClick={onSquareClick}>
       {valor}
@@ -12,14 +12,27 @@ function Square({valor, onSquareClick}) {
 }
 
 export default function Tabuleiro() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = 'X';
+    if (nextSquares[i]) {
+      return;
+    }
+    if (xIsNext) {
+      nextSquares[i] = 'X';
+      // setXIsNext(false);
+    } else {
+      nextSquares[i] = 'O';
+      // setXIsNext(true);
+    }
+    setXIsNext(!xIsNext);
     setSquares(nextSquares);
 
   }
+
+
 
   return (
     <div>
