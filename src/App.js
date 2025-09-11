@@ -16,7 +16,7 @@ function Tabuleiro({ xIsNext, squares, onPlay }) {
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    if (nextSquares[i] || calculaVencedor(squares)) {
+    if (squares[i] || calculaVencedor(squares)) {
       return;
     }
     if (xIsNext) {
@@ -33,7 +33,7 @@ function Tabuleiro({ xIsNext, squares, onPlay }) {
   const vencedor = calculaVencedor(squares);
   let status;
   if (vencedor) {
-    status = "Vencedor: " + status;
+    status = "Vencedor: " + vencedor;
   } else {
     status = "Próximo jogador: " + (xIsNext ? "x" : "O");
 
@@ -58,13 +58,13 @@ function Tabuleiro({ xIsNext, squares, onPlay }) {
         <Square valor={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </div>
-  )
+  );
 }
 
 
 export default function Game() {
-  const [history, setHistory] = useState(Array(9).fill(null));
-  const [currentMove, setCurrentMove] = useState(npm StaticRange0);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -81,13 +81,13 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Vai par o movimento #:' + move;
+      description = 'Vai para o movimento #:' + move;
     } else {
-      description = 'VAi para o inicio do jogo';
+      description = 'Vai para o inicio do jogo';
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo > (move)}>{description}</button>
+        <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     );
   });
@@ -108,11 +108,11 @@ export default function Game() {
 
 function calculaVencedor(squares) {
   const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
-  [1, 4, 3], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[2] === squares[a]) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a]
     }
   }
